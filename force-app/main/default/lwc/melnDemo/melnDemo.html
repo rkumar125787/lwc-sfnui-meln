@@ -1,0 +1,82 @@
+<template>
+    <div class="container">
+        <lightning-spinner variant="brand" size="large" if:true={isLoading}>
+        </lightning-spinner>
+        <form onsubmit={handleSubmit}>
+            <div class="row">
+                <div class="col-75">
+                    <lightning-input type='text' name='firstname' label='First Name' onchange={handleChange} required>
+                    </lightning-input>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-75">
+                    <lightning-input type='text' name='lastname' label='Last Name' onchange={handleChange} required>
+                    </lightning-input>
+                </div>
+            </div>
+            <div class="row">
+                <br />
+                <div class="col-75">
+                    <lightning-input type='email' name='email' label='Email Id' onchange={handleChange} required>
+                    </lightning-input>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+        <br />
+
+        <h2 style='color:#00396b;font-weight:bold'>MELN STACK (MongoDB,Express JS,LWC,Node JS)</h2>
+        <br />
+        <table if:true={contacts} class="slds-table slds-table_cell-buffer slds-table_bordered"
+            aria-labelledby="element-with-table-label other-element-with-table-label">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th class="" scope="col">
+                        <div class="slds-truncate">First Name</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate">Last Name</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate">Email</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate">ACTION</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={contacts} for:item="contact">
+                    <tr key={contact.id} class="slds-hint-parent">
+                        <td scope="row">
+                            <div class="slds-truncate">
+                                <div>{contact.firstname}</div>
+                            </div>
+                        </td>
+                        <td scope="row">
+                            <div class="slds-truncate">
+                                <div>{contact.lastname}</div>
+                            </div>
+                        </td>
+                        <td scope="row">
+                            <div class="slds-truncate">
+                                <div>{contact.email}</div>
+                            </div>
+                        </td>
+                        <td scope="row">
+                            <div class="slds-truncate">
+                                <lightning-icon icon-name="utility:delete" style='cursor:pointer' onclick={deleteRecord}
+                                    data-id={contact.id} icon-size="x-small"> </lightning-icon>
+                            </div>
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </div>
+
+</template>
